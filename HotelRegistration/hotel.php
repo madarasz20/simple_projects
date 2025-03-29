@@ -48,6 +48,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["fullname"]))
     $conn->query($sql_add_guest);
 }
 
+//Showing reservations
+$sql_select="SELECT * FROM hotelregistration";
+$table=$conn->query($sql_select);
+
+echo "<table border=1>";
+    echo "<tr>";
+    while($fieldinfo=$table->fetch_field())
+    {
+        echo "<th>".$fieldinfo->name."</th>";
+    }
+    echo "</tr>";
+    if($table->num_rows>0)
+    {
+        while($record=$table->fetch_assoc())
+        {
+            echo "<tr>";
+            foreach($record as $data)
+            {
+                echo "<th>".$data."</th>";
+            }
+            echo "</tr>";
+        }
+    }
+    
+echo "</table>";
+
+
 //closeing connection (otherwise wont run)
 $conn->close();
 ?>
