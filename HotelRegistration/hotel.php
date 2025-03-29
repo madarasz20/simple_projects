@@ -5,20 +5,21 @@ include("login.php");
 // Connect to MySQL without selecting a database first
 $conn = new mysqli($host, $user, $password);
 
+//if connection failed kill the program, throw exception
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Create the database if it does not exist
-$sql_create_db = "CREATE DATABASE IF NOT EXISTS hotel_database";
+// Create the database 
+$sql_create_db = "CREATE DATABASE IF NOT EXISTS hotelregistration";
 if ($conn->query($sql_create_db) === TRUE) {
     echo "Database created successfully (or already exists).<br>";
 } else {
     die("Error creating database: " . $conn->error);
 }
 
-// **Select the correct database**
-$conn->select_db("hotel_database");
+// Select the correct database
+$conn->select_db("hotelregistration");
 
 // Create the table if it does not exist
 $sql = "CREATE TABLE IF NOT EXISTS hotelregistration (
@@ -31,13 +32,23 @@ $sql = "CREATE TABLE IF NOT EXISTS hotelregistration (
     departure DATETIME NOT NULL
 )";
 
+//query
 if ($conn->query($sql) === TRUE) {
     echo "Table 'hotelregistration' created successfully (or already exists).<br>";
 } else {
     die("Error creating table: " . $conn->error);
 }
 
-// Close connection
+//Inserting a guest into the database through accessing the posted values from the form
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["fullname"]))
+{
+    $sql_add_guest="INSERT INTO hotelregistration(fullname, passport, email, arrival, departure) VALUES
+    ('".$_POST["fullname"]."','".$_POST["passport"]."','".$_POST["email"]."','".$_POST["arrivedate"]."','".$_POST["depdate"]."')";
+    
+    $conn->query($sql_add_guest);
+}
+
+//closeing connection (otherwise wont run)
 $conn->close();
 ?>
 
@@ -57,13 +68,16 @@ $conn->close();
             <h1>What's your passport?</h1>
             <input type="text" name="passport" placeholder="Write your ID/passport here">
 
+            <h1>What's your email address?</h1>
+            <input type="text" name="email" placeholder="Write your email here">
+
             <h1>When will you arrive?</h1>
             <input type="date" name="arrivedate">
 
             <h1>When will you depart?</h1>
             <input type="date" name="depdate"><br>
 
-            <input type="submit" name="reserve">
+            <input type="submit" value="reserve">
         </form>
     </body>
 </html>
