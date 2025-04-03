@@ -1,10 +1,6 @@
 <?php
 
-//1. load the xml
-//2. create an array from the xml
-//3. create a DB for the xml values
-//4. insert the values into the DB
-
+// creating the DB
 include("login.php");
 
 $conn= new mysqli($host,$user,$password);
@@ -30,11 +26,12 @@ else
 
 $conn->select_db("fromXml");
 
-$sql_db_table="CREATE TABLE IF NOT EXISTS fromXml (
-    id INT(3) UNSIGNED AUTO_iNCREMENT PRIMARY KEY,
+//creating the table
+$sql_db_table="CREATE TABLE IF NOT EXISTS zoo (
+    id INT(3) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
     origin VARCHAR(30) NOT NULL,
-    carnivourus BOOLEAN NOT NULL
+    carnivorous VARCHAR(30) NOT NULL
 
 )";
 
@@ -47,8 +44,6 @@ else
     die ("error creating database: ". $conn->error."<br>");
 }
 
-
-//1.
 //xml loading
 
 $xmlArray=[];
@@ -59,18 +54,27 @@ if(!file_exists('inputXML.xml'))
 else
 {
     $xmlContent=simplexml_load_file('inputXML.xml');
-    foreach($xmlContent->children() as $child)                      //loads the animals
+    foreach($xmlContent->animal as $animal)
     {
-        $array=$child->children();                                  //loads the name, origin, carnivorous values
-        $childname=$child->getName();
-        
+        $id = (int)$animal['id'];
+        $name = (string) $animal->name;
+        $origin = (string) $animal->origin;
+        $carnivorous= (string)$animal->carnivorous;
 
-        foreach($array as $subChild)
+        $sql = "INSERT INTO zoo (id, name, origin, carnivorous)
+                    VALUES ('$id', '$name', '$origin', '$carnivorous')";
+
+        if($conn->query($sql))
         {
-            //insert into DB here
-            echo $subChild->getName(). ":" . $subChild."<br>";
+            echo "animal $id inserted to DB"."<br>";
+        }
+        else
+        {
+            echo "Error";
         }
     }
+
+    $conn->close();
 }
 
 ?>
