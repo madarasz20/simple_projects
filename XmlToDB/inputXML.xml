@@ -1,0 +1,17 @@
+<zoo>
+    <animal id="1">
+        <name>Polar Bear</name>
+        <origin>Artic</origin>
+        <carnivorous>yes</carnivorous>
+    </animal>
+        <animal id="2">
+        <name>Tiger</name>
+        <origin>China</origin>
+        <carnivorous>yes</carnivorous>
+    </animal>
+        <animal id="3">
+        <name>Giraffe</name>
+        <origin>Africa</origin>
+        <carnivorous>no</carnivorous>
+    </animal>
+</zoo>
