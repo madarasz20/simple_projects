@@ -18,7 +18,7 @@ else
     echo "Connection success"."<br>";
 }
 
-$sql_create_db= "CREATE DATABASE IF NOT EXISTS zoo";
+$sql_create_db= "CREATE DATABASE IF NOT EXISTS fromXml";
 if($conn->query($sql_create_db))
 {
     echo "database created succesfully"."<br>";
@@ -28,8 +28,25 @@ else
     die ("error creating database: ". $conn->error."<br>");
 }
 
-$conn->select_db("zoo");
-//dynamically creating DB from the xml
+$conn->select_db("fromXml");
+
+$sql_db_table="CREATE TABLE IF NOT EXISTS fromXml (
+    id INT(3) UNSIGNED AUTO_iNCREMENT PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    origin VARCHAR(30) NOT NULL,
+    carnivourus BOOLEAN NOT NULL
+
+)";
+
+if($conn->query($sql_db_table))
+{
+    echo "TABLE created succesfully"."<br>";
+}
+else
+{
+    die ("error creating database: ". $conn->error."<br>");
+}
+
 
 //1.
 //xml loading
@@ -53,12 +70,7 @@ else
             //insert into DB here
             echo $subChild->getName(). ":" . $subChild."<br>";
         }
-
-
     }
 }
-
-
-
 
 ?>
