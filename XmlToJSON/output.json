@@ -1,0 +1,32 @@
+{
+    "book": [
+        {
+            "_attributes": {
+                "id": "1"
+            },
+            "title": {
+                "_value": "Harry Potter"
+            },
+            "author": {
+                "_value": "J.K. Rowling"
+            },
+            "price": {
+                "_value": "29.99"
+            }
+        },
+        {
+            "_attributes": {
+                "id": "2"
+            },
+            "title": {
+                "_value": "The Hobbit"
+            },
+            "author": {
+                "_value": "J.R.R. Tolkien"
+            },
+            "price": {
+                "_value": "25.50"
+            }
+        }
+    ]
+}
