@@ -1,0 +1,5 @@
+OBJ: Create a program that takes an xml file and loads it into a database.
+
+Make the tags, elements, as coulumn headers then the values stored are under.
+
+One row in the databse is equal to one chlid of the xml
