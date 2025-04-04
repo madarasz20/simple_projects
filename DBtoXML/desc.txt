@@ -1,0 +1,2 @@
+OBJ: write a program that takes data from a database,
+    Then creates an XML file 

@@ -46,7 +46,7 @@ else
 
 //xml loading
 
-$xmlArray=[];
+
 if(!file_exists('inputXML.xml'))
 {
     die("XML doesnt exisst");
