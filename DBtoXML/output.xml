@@ -1,0 +1,2 @@
+<?xml version="1.0"?>
+<root><item><id>1</id><name>Polar Bear</name><origin>Artic</origin><carnivorous>yes</carnivorous></item><item><id>2</id><name>Tiger</name><origin>China</origin><carnivorous>yes</carnivorous></item><item><id>3</id><name>Giraffe</name><origin>Africa</origin><carnivorous>no</carnivorous></item></root>
